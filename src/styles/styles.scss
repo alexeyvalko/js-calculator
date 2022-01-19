@@ -88,10 +88,12 @@ body {
   width: 100%;
   padding-bottom: 5px;
   border-bottom: 2px solid darken($calcKeyThirdColor, 5%);
+  overflow-wrap: break-word;
 }
 
 .scroll-y {
   overflow-y: scroll;
+  overflow-x: hidden;
   width: 100%;
   padding-right: 10px;
   scrollbar-width: thin;

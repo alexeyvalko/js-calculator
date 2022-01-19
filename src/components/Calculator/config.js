@@ -1,4 +1,4 @@
-export const keyValues = [
+export const KEY_VALUES = [
   'C',
   '±',
   ' ',
@@ -21,4 +21,11 @@ export const keyValues = [
   '=',
 ];
 
-export const DEFAULT_FONT_SIZE = 32
+export const DEFAULT_FONT_SIZE = 32;
+export const DEFAULT_RADIO_STATE = true;
+export const PRIORITY_RANKS = {
+  '+': 1,
+  '-': 1,
+  '✕': 2,
+  '÷': 2,
+}
