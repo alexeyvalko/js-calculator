@@ -1,0 +1,253 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  color: $bodyTextColor;
+  text-align: center;
+  background-color: $bodyBgColor;
+  color: $calcTextColor;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: $calcBgColor;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lighten($calcBgColor, 10%);
+  border-radius: 10px;
+}
+
+.app {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.calculator {
+  position: relative;
+  background-color: $calcBgColor;
+  width: 350px;
+  height: 700px;
+  border-radius: $calcBorderRadius;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  min-width: 300px;
+}
+
+.history-window {
+  min-width: 300px;
+  min-height: 200px;
+  max-width: 300px;
+  max-height: 400px;
+  overflow: hidden;
+  background-color: $calcKeysContainerBgColor;
+  background: linear-gradient(
+    157deg,
+    $calcKeysContainerBgColor 70%,
+    lighten($calcKeysContainerBgColor, 5%) 100%
+  );
+  padding: 40px;
+  border-radius: $calcBorderRadius;
+  filter: drop-shadow(0 2px 8px lighten($calcKeyBgColor, 10%));
+}
+
+.history-inner {
+  max-height: 320px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.history-inner > div:first-child {
+  width: 100%;
+  padding-bottom: 5px;
+  border-bottom: 2px solid darken($calcKeyThirdColor, 5%);
+  overflow-wrap: break-word;
+}
+
+.scroll-y {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: lighten($calcBgColor, 10%) $calcBgColor;
+}
+
+.display-container {
+  position: relative;
+  overflow: hidden;
+  height: 40%;
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 40px;
+  text-align: right;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.display-item {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: right;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+  transform-origin: right;
+  margin-top: 10px;
+}
+
+.display-item:nth-child(n + 2) {
+  padding: 0 0 0 40px;
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: darken($calcTextColor, 15%);
+  position: absolute;
+  bottom: 80px;
+  right: 40px;
+}
+
+.keys-container {
+  height: 60%;
+  width: 100%;
+  background-color: $calcKeysContainerBgColor;
+  border-radius: $calcBorderRadius;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 10px;
+  padding: 40px 40px;
+}
+
+.key {
+  font-size: 18px;
+  height: 100%;
+  width: 100%;
+  background-color: $calcKeyBgColor;
+  border-radius: $calcKeyBorderRadius;
+  color: $calcKeyPrimeColor;
+  text-shadow: (0 0px 10px rgba(252, 255, 255, 0.2));
+  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.key:nth-child(-n + 3) {
+  color: $calcKeyThirdColor;
+  text-shadow: (0 0px 10px rgba(58, 236, 201, 0.5));
+}
+.key:nth-child(4n) {
+  color: $calcSymbolColor;
+  text-shadow: (0 0px 10px rgba(175, 85, 86, 0.5));
+}
+
+.key:hover {
+  background-color: darken($calcKeyBgColor, 1%);
+}
+
+.key-down {
+  transform: scale(0.9);
+}
+
+.symbol-element {
+  color: $calcSymbolColor;
+}
+
+.options-container {
+  width: 100%;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.integers-option {
+  width: 40%;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.priority-option {
+  width: 20%;
+  z-index: 1;
+}
+
+.checkbox {
+  display: none;
+}
+
+.radio-element {
+  display: none;
+}
+
+.checkbox-label {
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  padding: 5px;
+  text-align: center;
+  color: $calcSymbolColor;
+  background-color: $calcKeysContainerBgColor;
+  transition: all 0.3s ease;
+}
+.radio-element:checked + .radio-label,
+.checkbox:checked + .checkbox-label {
+  color: $calcKeyThirdColor;
+}
+
+.radio-container {
+  display: block;
+  width: 45%;
+}
+
+.radio-label {
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  padding: 5px;
+  text-align: center;
+  color: $calcSymbolColor;
+  transition: all 0.3s ease;
+  background-color: $calcKeysContainerBgColor;
+}
+
+@import './button';

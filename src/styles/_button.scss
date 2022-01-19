@@ -1,0 +1,30 @@
+.button {
+  border-radius: 5px;
+  position: relative;
+  padding: 16px 32px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  color: white;
+  background: $calcKeyBgColor;
+  background: linear-gradient(
+    90deg,
+    $calcKeyBgColor 50%,
+    lighten($calcKeyBgColor, 15%) 100%
+  );
+  background-size: 200%;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 8px lighten($calcKeyBgColor, 10%));
+  transition: transform 0.1s, background-position 0.5s ease-in-out;
+
+  &:hover {
+    background-position: right;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
