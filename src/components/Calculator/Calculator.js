@@ -2,6 +2,7 @@ import { keyValues, DEFAULT_FONT_SIZE } from './config';
 import autoScaleText from '../autoScaleText';
 import Checkbox from '../Checkbox';
 import RadioElement from '../RadioElement';
+import Button from '../Button/Button';
 
 class Calculator {
   constructor(parentElement) {
@@ -28,11 +29,12 @@ class Calculator {
       this.defaultRadioCheck,
     );
 
+    this.button = new Button('Show history');
     this.historyContainer = document.createElement('div'); // окно для отображения истории операций
     this.historyWindow = document.createElement('div');
     this.historyWindowInnerContainer = document.createElement('div');
 
-    this.actualFontSize = DEFAULT_FONT_SIZE;   // размер шрифта по умолчанию, если число слишком большое оно будет уменьшаться
+    this.actualFontSize = DEFAULT_FONT_SIZE; // размер шрифта по умолчанию, если число слишком большое оно будет уменьшаться
 
     this.currentSymbol = null; // текущий символ операции
     this.prevNumber = null;
@@ -76,7 +78,7 @@ class Calculator {
   // функция которая выполняет все вычесления
   calc(currentNumber = this.currentNumber) {
     let result = currentNumber;
-    if (this.prevNumber !== null) {
+    if (this.prevNumber) {
       switch (this.currentSymbol) {
         case '+':
           result = this.prevNumber + currentNumber;
@@ -303,6 +305,18 @@ class Calculator {
       this.clear();
     };
 
+    const buttonHandler = () => {
+      const isWindowOpen = this.historyContainer.contains(this.historyWindow);
+      if (isWindowOpen) {
+        this.historyWindow.remove();
+      } else {
+        this.showHistory();
+        this.historyWindow.append(this.historyWindowInnerContainer);
+        this.historyContainer.appendChild(this.historyWindow);
+      }
+    };
+
+    this.button.element.addEventListener('click', buttonHandler);
     this.checkboxElement.label.addEventListener(
       'click',
       priorityCheckboxHandler,
@@ -332,6 +346,10 @@ class Calculator {
     this.calculator.classList.add('calculator');
     this.displayContainer.classList.add('display-container');
     this.keysContainer.classList.add('keys-container');
+    this.historyContainer.classList.add('history-container');
+    this.historyWindow.classList.add('history-window');
+    this.historyWindowInnerContainer.classList.add('history-inner');
+    this.historyContainer.append(this.button.element);
 
     this.currentItemDisplay = this.createDisplayItem('');
     this.prevItemDisplay = this.createDisplayItem('');
