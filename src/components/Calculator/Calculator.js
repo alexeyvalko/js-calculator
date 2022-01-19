@@ -33,12 +33,11 @@ class Calculator {
       'Dec',
       DEFAULT_RADIO_STATE,
     );
-
+   
     this.button = new Button('Show history');
     this.historyWindow = new HistoryWindow(this.button.element);
 
     this.actualFontSize = DEFAULT_FONT_SIZE; // размер шрифта по умолчанию, если число слишком большое оно будет уменьшаться
-
     this.currentSymbol = null; // текущий символ операции
     this.prevNumber = null;
     this.currentNumber = null;
@@ -288,9 +287,8 @@ class Calculator {
     /* слушатель для радиокнопок которые определяют режим работы */
     const integersOptionHandler = (e) => {
       if (e.target.matches('label')) {
-        this.defaultRadioCheck = !this.defaultRadioCheck;
-        this.radioElementInt.radio.checked = !this.defaultRadioCheck;
-        this.radioElementDec.radio.checked = this.defaultRadioCheck;
+        this.radioElementInt.radio.checked = !this.radioElementInt.radio.checked;
+        this.radioElementDec.radio.checked = !this.radioElementDec.radio.checked;
       }
     };
     /* слушатель для чекбока, который включения/отключения приоритета операций */
