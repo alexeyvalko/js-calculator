@@ -62,7 +62,8 @@ class Calculator {
     this.prevItemDisplay.textContent = '';
     this.currentItemDisplay.textContent = '';
     this.currentNumber = null;
-    this.actualFontSize = this.DEFAULT_FONT_SIZE;
+    this.actualFontSize = DEFAULT_FONT_SIZE;
+    this.currentItemDisplay.style.fontSize = this.actualFontSize;
     this.currentSymbol = '';
     this.prevNumber = null;
     this.numbersStack = [];
@@ -234,6 +235,7 @@ class Calculator {
 
   /* если наше число очень большое, то мы уменьшм шрифт на дисплее, чтобы оно вместилось */
   scaleMainItemFontSize() {
+
     this.actualFontSize = autoScaleText(
       this.displayContainer.clientWidth,
       this.currentItemDisplay.clientWidth,
