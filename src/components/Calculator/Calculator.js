@@ -186,7 +186,6 @@ class Calculator {
       this.getResultWithPriority();
     }
     if (this.numbersStack.length === MIN_STACK_LENGTH) {
-      console.log(this.numbersStack);
       this.prevItemDisplay.textContent = '';
       this.currentItemDisplay.textContent = this.numbersStack.pop();
     }
