@@ -174,17 +174,18 @@ class Calculator {
       const lastNumber = parseFloat(this.currentItemDisplay.textContent, 10);
       this.numbersStack.push(lastNumber);
       this.currentItemDisplay.textContent = '';
+      this.getResultWithPriority()
     }
-
     if (numbersStackLength > MIN_STACK_LENGTH) {
       this.currentNumber = this.numbersStack.pop();
       this.prevNumber = this.numbersStack.pop();
       this.currentSymbol = this.operandsStack.pop();
       const lastNumber = this.calc();
+      
       this.numbersStack.push(lastNumber);
       this.getResultWithPriority();
     }
-    if (numbersStackLength === MIN_STACK_LENGTH) {
+    if (this.numbersStack.length === MIN_STACK_LENGTH) {
       this.prevItemDisplay.textContent = '';
       this.currentItemDisplay.textContent = this.numbersStack.pop();
     }
