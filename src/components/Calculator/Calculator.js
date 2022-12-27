@@ -24,12 +24,12 @@ class Calculator {
     this.priorityOption = document.createElement('div');
     this.checkboxElement = new Checkbox(); // чекбокс для вычеслений с приоритетом операций
     this.radioElementInt = new RadioElement( // радиоэлемент для включения режима работы c целыми числами
-      'integers',
+      'integers-decimals',
       'Int',
       !DEFAULT_RADIO_STATE,
     );
     this.radioElementDec = new RadioElement(
-      'Decimals', // радиоэлемент для включения режима работы c вещественными числами
+      'integers-decimals', // радиоэлемент для включения режима работы c вещественными числами
       'Dec',
       DEFAULT_RADIO_STATE,
     );
